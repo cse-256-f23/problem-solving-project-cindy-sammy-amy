@@ -209,9 +209,9 @@ function define_new_effective_permissions(id_prefix, add_info_col = false, which
 function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
     // Set up table and header:
     let group_table = $(`
-    <table id="${id_prefix}" class="ui-widget-content" width="100%">
+    <table id="${id_prefix}" width="100%">
         <tr id="${id_prefix}_header">
-            <th id="${id_prefix}_header_p" width="99%">Permissions for <span id="${id_prefix}_header_username"></span>
+            <th id="${id_prefix}_header_p" width="90%">Basic Permissions <span id="${id_prefix}_header_username"></span>
             </th>
             <th id="${id_prefix}_header_allow">Allow</th>
             <th id="${id_prefix}_header_deny">Deny</th>
@@ -240,10 +240,11 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
 
     // Update checkboxes when either user or file changes:
     let update_group_checkboxes = function(){
-
+        
         // get current settings:
         let username = group_table.attr('username')
         let filepath = group_table.attr('filepath')
+        console.log(username)
         // if both properties are set correctly:
         if( username && username.length > 0 && (username in all_users) &&
             filepath && filepath.length > 0 && (filepath in path_to_file)) {
@@ -295,7 +296,7 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
 function define_permission_checkboxes(id_prefix, which_permissions = null){
     // Set up table and header:
     let perm_table = $(`
-    <table id="${id_prefix}" class="ui-widget-content" width="100%">
+    <table id="${id_prefix}" id = "permtable_2" class="ui-widget-content" width="100%">
         <tr id="${id_prefix}_header">
             <th id="${id_prefix}_header_p" width="99%">Permissions for <span id="${id_prefix}_header_username"></span>
             </th>
@@ -468,7 +469,7 @@ function open_user_select_dialog(to_populate_id) {
     // TODO: reset selected user?..
 
     user_select_dialog.attr('to_populate', to_populate_id)
-    user_select_dialog.dialog('open')
+
 }
 
 // define a new user-select field which opens up a user-select dialog and stores the result in its own selected_user attribute.
@@ -480,11 +481,11 @@ function define_new_user_select_field(id_prefix, select_button_text, on_user_cha
     // Make the element:
     let sel_section = $(`<div id="${id_prefix}_line" class="section">
             <span id="${id_prefix}_field" class="ui-widget-content" style="width: 80%;display: inline-block;">&nbsp</span>
-            <button id="${id_prefix}_button" class="ui-button ui-widget ui-corner-all">${select_button_text}</button>
+            <button id="${id_prefix}" class="ui-button ui-widget ui-corner-all">${select_button_text}</button>
         </div>`)
 
     // Open user select on button click:
-    sel_section.find(`#${id_prefix}_button`).click(function(){
+    sel_section.find(`#${id_prefix}`).click(function(){
         open_user_select_dialog(`${id_prefix}_field`)
     })
 
@@ -498,6 +499,8 @@ function define_new_user_select_field(id_prefix, select_button_text, on_user_cha
 
     return sel_section
 }
+
+
 
 //---- misc. ----
 
@@ -515,7 +518,7 @@ function get_explanation_text(explanation) {
 //---- some universal HTML set-up so you don't have to do it in each wrapper.html ----
 $('#filestructure').css({
     'display':'inline-block',
-    'width':'49%',
+    'width':'70%',
     'vertical-align': 'top'
 })
 $('#filestructure').after('<div id="sidepanel" style="display:inline-block;width:49%"></div>')

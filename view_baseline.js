@@ -7,7 +7,7 @@ show_starter_dialogs = false // set this to "false" to disable the survey and 3-
 // Make permissions dialog:
 perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
     // The following are standard jquery-ui options. See https://jqueryui.com/dialog/
-    height: 500,
+    height: 400,
     width: 400,
     buttons: {
         OK:{
@@ -152,6 +152,16 @@ perm_add_user_select.append(perm_remove_user_button) // Cheating a bit again - a
 perm_dialog.append(grouped_permissions)
 perm_dialog.append(advanced_expl_div)
 
+
+// changes added for overview tab
+perm_user_select_list = make_all_users_list('user_select', 'user_select_container', 200)
+$('#user_select_container_perm').append(perm_user_select_list)
+add_button = define_new_user_select_field("add_user", "add", on_user_change = function(selected_user){});
+add_button.find('span').hide()
+console.log(add_button)
+$('#button').append(add_button)
+
+
 // --- Additional logic for reloading contents when needed: ---
 //Define an observer which will propagate perm_dialog's filepath attribute to all the relevant elements, whenever it changes:
 define_attribute_observer(perm_dialog, 'filepath', function(){
@@ -180,11 +190,14 @@ function make_all_users_list(id_prefix, attr_set_id, height=80) {
     let all_user_list = $(`<div id="${id_prefix}_all_users" class="selectlist section" style="height:${height}px;overflow-y:scroll"></div>`)
     for(let username in all_users) {
         let user = all_users[username]
+
         all_user_list.append(
             `<div class="ui-widget-content" id="${id_prefix}_${username}" username="${username}">
                 <span id="${id_prefix}_${username}_icon" class="oi ${is_user(user)?'oi-person':'oi-people'}"/> 
                 ${username}
             </div>`)
+
+
     }
 
     all_user_list.selectable({
@@ -193,13 +206,34 @@ function make_all_users_list(id_prefix, attr_set_id, height=80) {
             $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected"); 
 
             $(`#${attr_set_id}`).attr('username', ui.selected.getAttribute('username'))
-
+            
             emitter.dispatchEvent(new CustomEvent('userEvent', { detail: new ClickEntry(ActionEnum.CLICK, (e.clientX + window.pageXOffset), (e.clientY + window.pageYOffset), 'user dialog: select user '+ui.selected.getAttribute('username'),new Date().getTime()) }))
 
+            $(selected_user).empty()
+            $(selected_user).append(ui.selected.getAttribute('username'))
+            $(adv_effective_current_user).empty()
+            $(adv_effective_current_user).append(ui.selected.getAttribute('username'))
+            $(adv_effective_current_user).attr('selected_user', ui.selected.getAttribute('username'))
 
+            // Make the (individual) permission checkboxes table:
+            individual_permissions = define_permission_checkboxes('permdialog_individual_permissions')
+            individual_permissions.addClass('section') 
+            individual_permissions.attr('username', ui.selected.getAttribute('username'))
+            individual_permissions.attr('filepath', advdialog.getAttribute('filepath'))
+            $(perm_table_container).empty();
+            $(perm_table_container).append(individual_permissions)
+            // perm_entry_header_allow
+
+            grouped_permissions = define_grouped_permission_checkboxes('permdialog_grouped_permissions')
+            grouped_permissions.addClass('section') 
+            grouped_permissions.attr('username', ui.selected.getAttribute('username'))
+            grouped_permissions.attr('filepath', advdialog.getAttribute('filepath'))
+            $('#perm_entry_table').empty()
+            $('#perm_entry_table').append(grouped_permissions)
+            
         }
     })
-
+    
     return all_user_list
 }
 
@@ -211,7 +245,6 @@ function open_permission_entry(file_path) {
 
     $('.perm_entry_checkcell').empty()
 
-    $(`#permentry`).dialog('open')
 }
 
 // populate and open the "advanced" dialog for a given file
@@ -294,10 +327,10 @@ function open_user_select(to_populate) {
     $('#user_select_dialog').attr('to_populate', to_populate)
 
     $('#user_select_container').empty()
-    user_select_list = make_all_users_list('user_select', 'user_select_dialog', 200)
+    user_select_list = make_all_users_list('user_select', 'user_select_container', 200)
+
     $('#user_select_container').append(user_select_list)
 
-    $(`#user_select_dialog`).dialog('open')
 }
 
 // set up effective permissions table in advanced -> effective dialog
@@ -318,7 +351,7 @@ $( "#advtabs" ).tabs({
 let adv_contents = $(`#advdialog`).dialog({
     position: { my: "top", at: "top", of: $('#html-loc') },
     width: 700,
-    height: 450,
+    height: 700,
     modal: true,
     autoOpen: false,
     appendTo: "#html-loc",
@@ -337,6 +370,7 @@ let adv_contents = $(`#advdialog`).dialog({
 // open user select dialog on "select" button press:
 $("#adv_effective_user_select").click(function(event){
     open_user_select("adv_effective_current_user") // Update element with id=adv_effective_current_user once user is selected.
+    
 })
 
 // listen for changes to inheritance checkbox:
@@ -454,6 +488,11 @@ effective_user_observer = new MutationObserver(function(mutationsList, observer)
 
 effective_user_observer.observe(document.getElementById('adv_effective_current_user'), {attributes: true})
 
+
+user_select_list_effective = make_all_users_list('user_select', 'user_select_container', 200)
+$('#user_select_container_effective').append(user_select_list_effective)
+
+
 // change owner button:
 $('#adv_owner_change_button').click(function() {
     let selected_username = $('#adv_owner_current_owner').attr('username')
@@ -470,7 +509,7 @@ $('#adv_owner_change_button').click(function() {
 
 // User dialog 
 let user_select_contents = $("#user_select_dialog").dialog({
-    height: 450,
+    height: 200,
     width: 400,
     modal: true,
     autoOpen: false,
@@ -531,14 +570,14 @@ for(let p of Object.values(permissions)){
     $('#perm_entry_table').append(row)
 }  
 
-$('#adv_perm_edit').click(function(){
-    let filepath = $('#advdialog').attr('filepath')
-    open_permission_entry(filepath)
-})
+$('#adv_perm_edit').append(
+    open_permission_entry($('#advdialog').attr('filepath'))
+)
 
-$('#perm_entry_change_user').click(function(){
+$('#perm_entry_change_user').append(
     open_user_select('perm_entry_username') 
-})
+)
+
 
 
 perm_entry_user_observer = new MutationObserver(function(mutationsList, observer){

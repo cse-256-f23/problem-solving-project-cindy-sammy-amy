@@ -12,15 +12,15 @@ function make_file_element(file_obj) {
         let folder_elem = $(`<div class='folder' id="${file_hash}_div">
             <h3 id="${file_hash}_header">
                 <span class="oi oi-folder" id="${file_hash}_icon"/> ${file_obj.filename} 
-                <button class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
-                    <span class="oi oi-lock-unlocked" id="${file_hash}_permicon"/> 
+                <button style = 'margin-left: 20px' class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
+                    <p> Permissions <span class="oi oi-lock-unlocked" id="${file_hash}_permicon"/> </p>
                 </button>
             </h3>
         </div>`)
 
         // append children, if any:
         if( file_hash in parent_to_children) {
-            let container_elem = $("<div class='folder_contents'></div>")
+            let container_elem = $("<div class='folder_contents' ></div>")
             folder_elem.append(container_elem)
             for(child_file of parent_to_children[file_hash]) {
                 let child_elem = make_file_element(child_file)
@@ -32,8 +32,8 @@ function make_file_element(file_obj) {
     else {
         return $(`<div class='file'  id="${file_hash}_div">
             <span class="oi oi-file" id="${file_hash}_icon"/> ${file_obj.filename}
-            <button class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
-                <span class="oi oi-lock-unlocked" id="${file_hash}_permicon"/> 
+            <button style = 'margin-left: 20px' class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
+                <p>Permissions <span class="oi oi-lock-unlocked" id="${file_hash}_permicon"/> </p>
             </button>
         </div>`)
     }
@@ -60,7 +60,8 @@ $('.permbutton').click( function( e ) {
     // Set the path and open dialog:
     let path = e.currentTarget.getAttribute('path');
     perm_dialog.attr('filepath', path)
-    perm_dialog.dialog('open')
+    //perm_dialog.dialog('open')
+    open_advanced_dialog(perm_dialog.attr('filepath'))
     //open_permissions_dialog(path)
 
     // Deal with the fact that folders try to collapse/expand when you click on their permissions button:
