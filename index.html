@@ -89,22 +89,23 @@
 
                 
                 <!-- structure for the Advanced dialog: -->
-                <div title="Security Settings" id="advdialog" style="overflow-y: scroll">
+                <div title="Security Settings" id="advdialog" style="overflow-y: scroll; height: 750px;">
                     <div id="advtabs">
                         <ul id="advtabs_titles">
                             <li id="overview_tab"><a href="#permentry_tab"
                                 id="overview_tab_elem">Overview</a></li>
-                            <li id="advtab_title_permissions"><a href="#adv_permissions_tab"
-                                    id="adv_permissions_tab_elem">Permissions</a></li>
                             <li id="advtab_title_owner"><a href="#adv_owner_tab" id="adv_owner_tab_elem">Owner</a></li>
+                            <li id="advtab_title_permissions"><a href="#adv_permissions_tab"
+                                    id="adv_permissions_tab_elem">Change Permissions</a></li>
+                           
                             <li id="advtab_title_effective"><a href="#adv_effective_tab"
-                                    id="adv_effective_tab_elem">Effective Permissions</a></li>
+                                    id="adv_effective_tab_elem">View Permissions</a></li>
                                 
                         </ul>
                         <div id="adv_permissions_tab">
                             <div id="adv_perm_object_name" class="section">Object Name: <span
                                     id="adv_perm_filepath"></span></div>
-                                    <span id="perm_entry_name_text">Group or User: </span>
+                                    <span id="perm_entry_name_text" style="margin-bottom: 20px;">Group or User: </span>
                                     <div title="Select Users or Groups" id="user_select_dialog">
                                         <div id="user_select_container"></div>
                                     </div>

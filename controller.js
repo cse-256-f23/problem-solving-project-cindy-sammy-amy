@@ -269,6 +269,7 @@ function get_grouped_permissions(file_obj, username) {
         deny: {},
     };
 
+    console.log("he;;o")
     let total_permissions = get_total_permissions(file_obj, username);
     for (let ace_type in grouped_permissions) {
         // 'allow' and 'deny'

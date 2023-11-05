@@ -40,6 +40,7 @@ function make_user_elem(id_prefix, uname, user_attributes=null) {
     if (user_attributes) {
         // if we need to add the user's attributes: go through the properties for that user and add each as an attribute to user_elem.
         for(uprop in user_attributes) {
+   
             user_elem.attr(uprop, user_attributes[uprop])
         }
     }
@@ -238,13 +239,15 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
 
     group_table.find('.groupcheckbox').prop('disabled', true)// disable all checkboxes to start
 
+
+    
     // Update checkboxes when either user or file changes:
     let update_group_checkboxes = function(){
-        
+
         // get current settings:
-        let username = group_table.attr('username')
+        let username = $(".ui-selected").attr('name')
         let filepath = group_table.attr('filepath')
-        console.log(username)
+
         // if both properties are set correctly:
         if( username && username.length > 0 && (username in all_users) &&
             filepath && filepath.length > 0 && (filepath in path_to_file)) {
@@ -370,8 +373,7 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
 
     //Update permissions when checkbox is clicked:
     perm_table.find('.perm_checkbox').change(function(){
-        console.log(perm_table.attr('filepath'), perm_table.attr('username'), $(this).attr('permission'), $(this).attr('ptype'), $(this).prop('checked'))
-        toggle_permission( perm_table.attr('filepath'), perm_table.attr('username'), $(this).attr('permission'), $(this).attr('ptype'), $(this).prop('checked'))
+         toggle_permission( perm_table.attr('filepath'), perm_table.attr('username'), $(this).attr('permission'), $(this).attr('ptype'), $(this).prop('checked'))
         update_perm_table()// reload checkboxes
     })
 
@@ -396,11 +398,9 @@ function define_file_permission_groups_list(id_prefix){
         $(`#${id_prefix} tr:gt(0)`).remove() // remove all old permission stuff - all but the first (title) row of the table.
 
         let filepath = perm_list.attr('filepath')
-        console.log(filepath)
-
+   
         if(filepath && filepath.length > 0 && (filepath in path_to_file)) {
 
-            console.log('filepath')
 
             let file_obj = path_to_file[filepath]
             let users = get_file_users(file_obj)
@@ -467,9 +467,8 @@ user_select_dialog.append(all_users_selectlist)
 // Call this function whenever you need a user select dialog; it will automatically populate the 'selected_user' attribute of the element with id to_populate_id
 function open_user_select_dialog(to_populate_id) {
     // TODO: reset selected user?..
-
     user_select_dialog.attr('to_populate', to_populate_id)
-
+    user_select_dialog.dialog('open')
 }
 
 // define a new user-select field which opens up a user-select dialog and stores the result in its own selected_user attribute.
@@ -483,10 +482,11 @@ function define_new_user_select_field(id_prefix, select_button_text, on_user_cha
             <span id="${id_prefix}_field" class="ui-widget-content" style="width: 80%;display: inline-block;">&nbsp</span>
             <button id="${id_prefix}" class="ui-button ui-widget ui-corner-all">${select_button_text}</button>
         </div>`)
-
+    
     // Open user select on button click:
     sel_section.find(`#${id_prefix}`).click(function(){
         open_user_select_dialog(`${id_prefix}_field`)
+
     })
 
     // Set up an observer to watch the attribute change and change the field

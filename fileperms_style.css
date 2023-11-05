@@ -38,19 +38,23 @@
 }
 
 
-
-
 /* owner tab CSS */
 #adv_owner_tab, #adv_permissions_tab{
     background-color: #f5f5f5;
-    overflow-y: hidden;
+    overflow-y: clip;
 }
 
 #advtabs, #advdialog{
-   
     background-color: #f5f5f5;
-    overflow-y: scroll;
+    overflow-y: clip;
+    height: 650px;
+    
+}
+
+#ui-id-81{
+    margin-top: 50px; 
     height: 550px;
+    overflow-y: clip;
 }
 
 #adv_owner_explanation {
@@ -58,23 +62,22 @@
     color: #333;
 }
 
-#advtabs_titles
 
-#adv_owner_object_name, #adv_perm_object_name{
+#adv_owner_object_name, #adv_perm_object_name, #adv_effective_object_name{
     font-size: 16px;
     margin-top: 10px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-#adv_owner_current_owner_text, #perm_entry_name_text, #ui-id-89{
+#adv_owner_current_owner_text, #adv_effective_user_text, #perm_entry_name_text, #ui-id-89{
     font-size: 16px;
     margin-top: 10px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-#adv_owner_current_owner, #selected_user{
+#adv_owner_current_owner, #selected_user, #adv_effective_current_user{
     display: inline-block;
     font-weight: normal;
     padding: 5px;
@@ -104,9 +107,6 @@
     height: fit-content;
 }
 
-#user_select_container, #user_select_container_perm{
-    height: 100px;
-}
 
 #user_select_container_perm{
     width: 400px;
@@ -118,7 +118,7 @@
     width: 400px;
 }
 
-#add_user, #remove_user{
+#add_user, #perm_remove_user{
     display: inline-block;
     margin-left: 20px;
     background-color: #007bff;
@@ -126,4 +126,13 @@
     border: none;
     padding: 10px;
     cursor: pointer;
+}
+
+#user_select_all_users , #adv_owner_user_list, #user_select_container_effective{
+    margin-bottom: 20px;
+}
+
+#user_select_container_perm{
+    height: 90px;
+    overflow-y: scroll;
 }
