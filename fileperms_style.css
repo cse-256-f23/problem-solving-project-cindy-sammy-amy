@@ -53,11 +53,11 @@
 
 #ui-id-81{
     margin-top: 50px; 
-    height: 550px;
+    /* height: 550px; */
     overflow-y: clip;
 }
 
-#adv_owner_explanation {
+#adv_owner_explanation, #inheritance_explaination{
     font-size: 14px;
     color: #333;
 }
@@ -70,7 +70,7 @@
     margin-bottom: 20px;
 }
 
-#adv_owner_current_owner_text, #adv_effective_user_text, #perm_entry_name_text, #ui-id-89{
+#adv_owner_current_owner_text, #adv_effective_user_text, #perm_entry_name_text{
     font-size: 16px;
     margin-top: 10px;
     font-weight: bold;
@@ -112,13 +112,14 @@
     width: 400px;
     display: inline-block;
     float:left;
+    margin-right: 10px;
 }
 
 #perm_entry_table{
     width: 400px;
 }
 
-#add_user, #perm_remove_user{
+#add_user, #directions_button, #perm_remove_user{
     display: inline-block;
     margin-left: 20px;
     background-color: #007bff;
@@ -135,4 +136,18 @@
 #user_select_container_perm{
     height: 90px;
     overflow-y: scroll;
+}
+
+#add_explain{
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+}
+
+#adv_perm_replace_child_div{
+    margin-bottom: 20px;
+}
+
+#permdialog_individual_permissions_header_allow, #permdialog_individual_permissions_header_deny{
+    padding-right: 10px;
 }

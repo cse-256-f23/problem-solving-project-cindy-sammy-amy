@@ -99,7 +99,7 @@
                                     id="adv_permissions_tab_elem">Change Permissions</a></li>
                            
                             <li id="advtab_title_effective"><a href="#adv_effective_tab"
-                                    id="adv_effective_tab_elem">View Permissions</a></li>
+                                    id="adv_effective_tab_elem">View Inheritance</a></li>
                                 
                         </ul>
                         <div id="adv_permissions_tab">
@@ -109,7 +109,17 @@
                                     <div title="Select Users or Groups" id="user_select_dialog">
                                         <div id="user_select_container"></div>
                                     </div>
-                                    
+                                    <div id="adv_perm_inheritance_div">
+                                        <input type="checkbox" id="adv_perm_inheritance" name="inherit">
+                                        <label for="adv_perm_inheritance" id="adv_perm_inheritance_label">Include inheritable
+                                            permissions from this object's parent</label>
+                                    </div>
+                                    <div id="adv_perm_replace_child_div">
+                                        <input type="checkbox" id="adv_perm_replace_child_permissions" name="replace_child">
+                                        <label for="adv_perm_replace_child_permissions"
+                                            id="adv_perm_replace_child_permissions_label">Replace all child object permissions
+                                            with inheritable permissions from this object</label>
+                                    </div>
                                     <p>Permissions for: 
                                         <span id="selected_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span>
                                     </p>
@@ -119,22 +129,13 @@
                                             <th id="perm_entry_header_p" width = "50%">Permissions</th>
                                             <th id="perm_entry_header_allow">Allow</th>
                                             <th id="perm_entry_header_deny">Deny</th>
+                                            <th id="perm_entry_header_inherited">Inherited?</th>
                                         </tr>
                                     </table>
                                 </div>
                             
                             
-                            <div id="adv_perm_inheritance_div">
-                                <input type="checkbox" id="adv_perm_inheritance" name="inherit">
-                                <label for="adv_perm_inheritance" id="adv_perm_inheritance_label">Include inheritable
-                                    permissions from this object's parent</label>
-                            </div>
-                            <div id="adv_perm_replace_child_div">
-                                <input type="checkbox" id="adv_perm_replace_child_permissions" name="replace_child">
-                                <label for="adv_perm_replace_child_permissions"
-                                    id="adv_perm_replace_child_permissions_label">Replace all child object permissions
-                                    with inheritable permissions from this object</label>
-                            </div>
+                            
                         </div>
                         <div id="adv_owner_tab">
                             <div id="adv_owner_explanation" class="section">You can take or assign ownership of this
@@ -150,6 +151,8 @@
                             
                         </div>
                         <div id="adv_effective_tab">
+                            <div id="inheritance_explaination" class="section">This tab allows you to view the inherited permissions on files/folders. A file/folder may inherit permissions from its parent folder. By default, this inheritance is on for all files/folders. But it is possible to turn off inheritance for a particular file/folder in the Change Permissions tab.
+                            </div>
                             <div id="adv_effective_object_name" class="section">Object Name: <span
                                     id="adv_effective_filepath"></span></div>
                             <div id="adv_effective_user_text">Group or user name:</div>
@@ -165,7 +168,7 @@
 
                             <div id="adv_effective_effective_text">Effective permissions:</div>
                             <div id="adv_effective_effective_list" class="ui-widget-content"
-                                style="height:150px;overflow-y:scroll"></div>
+                                style="height:250px;overflow-y:scroll"></div>
                         </div>
 
                         <!-- overview tab -->
@@ -177,20 +180,26 @@
                             <span id="perm_entry_name_text">Group or User: </span>
                                     <div title="Select Users or Groups" id="user_select_dialog">
                                         <div id="user_select_container_perm"></div>       
-                                        <div id = "button"></div>
+                                        <div id = "button"> 
+                                            <p id = "add_explain">Add or Remove a user to add/remove permissions.
+                                            </p>
+                                        </div>
                                     </div>
                                     <p style="display: inline-block;">Basic Permissions for: 
                                         <span id="selected_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span>
                                     </p>
 
 
-                            <table id="perm_entry_table" class="ui-widget-content section">
+                            <table id="perm_entry_table" class="ui-widget-content section" style="display:inline-block; float: left;">
                                 <tr id="perm_entry_header">
                                     <th id="perm_entry_header_p" width="99%">Basic Permissions</th>
                                     <th id="perm_entry_header_allow">Allow</th>
                                     <th id="perm_entry_header_deny">Deny</th>
                                 </tr>
                             </table>
+                            <div id="directions">
+                                <button class = "ui-button ui-widget ui-corner-all" id = "directions_button" style="float:right; width: 150px; margin-top:50px;">File Permissions User Guide</button>
+                            </div>
                         </div>
                     </div>
                 </div>

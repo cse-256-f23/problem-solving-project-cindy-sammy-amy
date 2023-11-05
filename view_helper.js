@@ -251,7 +251,7 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
         // if both properties are set correctly:
         if( username && username.length > 0 && (username in all_users) &&
             filepath && filepath.length > 0 && (filepath in path_to_file)) {
-                    
+                   
             // clear previous checkbox state:
             group_table.find('.groupcheckbox').prop('disabled', false)
             group_table.find('.groupcheckbox').prop('checked', false)
@@ -262,11 +262,12 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
 
             // get new grouped permissions:
             let grouped_perms = get_grouped_permissions(path_to_file[filepath], username)
-
+            
             for( ace_type in grouped_perms) { // 'allow' and 'deny'
                 for(allowed_group in grouped_perms[ace_type]) {
                     let checkbox = group_table.find(`#${id_prefix}_${allowed_group}_${ace_type}_checkbox`)
                     checkbox.prop('checked', true)
+   
                     if(grouped_perms[ace_type][allowed_group].inherited) {
                         // can't uncheck inherited permissions.
                         checkbox.prop('disabled', true)
@@ -283,12 +284,12 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
         }
 
     }
-    define_attribute_observer(group_table, 'username', update_group_checkboxes)
+    define_attribute_observer(group_table, 'name', update_group_checkboxes)
     define_attribute_observer(group_table, 'filepath', update_group_checkboxes)
 
     //Update permissions when checkbox is clicked:
     group_table.find('.groupcheckbox').change(function(){
-        toggle_permission_group( group_table.attr('filepath'), group_table.attr('username'), $(this).attr('group'), $(this).attr('ptype'), $(this).prop('checked'))
+        toggle_permission_group( group_table.attr('filepath'), $(".ui-selected").attr('name'), $(this).attr('group'), $(this).attr('ptype'), $(this).prop('checked'))
         update_group_checkboxes()// reload checkboxes
     })
 
@@ -303,12 +304,13 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
         <tr id="${id_prefix}_header">
             <th id="${id_prefix}_header_p" width="99%">Permissions for <span id="${id_prefix}_header_username"></span>
             </th>
-            <th id="${id_prefix}_header_allow">Allow</th>
-            <th id="${id_prefix}_header_deny">Deny</th>
+            <th id="${id_prefix}_header_allow">Allow  </th>
+            <th id="${id_prefix}_header_deny">Deny  </th>
+            <th id="${id_prefix}_header_inherited">Inherited?</th>
         </tr>
     </table>
     `)
-
+    
     // If no subset of permissions is passed in, use all of them.
     if(which_permissions === null) {
         which_permissions = Object.values(permissions)
@@ -323,8 +325,10 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
         for(let ace_type of ['allow', 'deny']) {
             row.append(`<td id="${id_prefix}_${p_id}_${ace_type}_cell">
                 <input type="checkbox" id="${id_prefix}_${p_id}_${ace_type}_checkbox" ptype="${ace_type}" class="perm_checkbox" permission="${p}" ></input>
-            </td>`)
+            </td>`)        
         }
+
+        row.append(`<p id="${id_prefix}_${p_id}_is_inherited">N/A</p>`)
         perm_table.append(row)
     }
 
@@ -356,9 +360,21 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
                     if(all_perms[ace_type][allowed_perm].inherited) {
                         // can't uncheck inherited permissions.
                         checkbox.prop('disabled', true)
+                        $(`#${id_prefix}_${p_id}_is_inherited`).empty()
+                        $(`#${id_prefix}_${p_id}_is_inherited`).append('Yes')
+  
+                    }
+                    else{
+                        $(`#${id_prefix}_${p_id}_is_inherited`).empty()
+                        $(`#${id_prefix}_${p_id}_is_inherited`).append('No')
+     
                     }
                 }
+
+                
             }
+            
+            //row.append(`<p id="${id_prefix}_is_inherited">Yes</p>`)
         }
         else {
             // can't get permissions for this username/filepath - reset everything into a blank state
@@ -367,7 +383,7 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
             $(`#${id_prefix}_header_username`).text('')
         }
     }
-
+    
     define_attribute_observer(perm_table, 'username', update_perm_table)
     define_attribute_observer(perm_table, 'filepath', update_perm_table)
 
@@ -376,6 +392,15 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
          toggle_permission( perm_table.attr('filepath'), perm_table.attr('username'), $(this).attr('permission'), $(this).attr('ptype'), $(this).prop('checked'))
         update_perm_table()// reload checkboxes
     })
+    $('#adv_perm_inheritance').change(function(){
+        toggle_permission( perm_table.attr('filepath'), perm_table.attr('username'), $(this).attr('permission'), $(this).attr('ptype'), $(this).prop('checked'))
+        
+       console.log("hello")
+       $('#adv-inheritance-add-button').click(function(){
+            update_perm_table()
+            console.log("here")
+        })
+   })
 
     return perm_table
 }
@@ -478,7 +503,7 @@ function open_user_select_dialog(to_populate_id) {
 // - on_user_change is an additional function you can pass in, which will be called each time a user is selected.
 function define_new_user_select_field(id_prefix, select_button_text, on_user_change = function(selected_user){}){
     // Make the element:
-    let sel_section = $(`<div id="${id_prefix}_line" class="section">
+    let sel_section = $(`<div id="${id_prefix}_line" class="section" style="display: inline-block;">
             <span id="${id_prefix}_field" class="ui-widget-content" style="width: 80%;display: inline-block;">&nbsp</span>
             <button id="${id_prefix}" class="ui-button ui-widget ui-corner-all">${select_button_text}</button>
         </div>`)

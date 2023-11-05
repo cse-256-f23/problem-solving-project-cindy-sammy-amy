@@ -269,7 +269,6 @@ function get_grouped_permissions(file_obj, username) {
         deny: {},
     };
 
-    console.log("he;;o")
     let total_permissions = get_total_permissions(file_obj, username);
     for (let ace_type in grouped_permissions) {
         // 'allow' and 'deny'
@@ -362,7 +361,7 @@ function toggle_permission_group(filepath, username, group, type, is_on) {
     let user = all_users[username];
     let permissions = permission_groups[group];
     let is_allow_ace = type === 'allow';
-
+ 
     if (is_on) {
         add_permissons(file_obj, user, permissions, is_allow_ace);
     } else {

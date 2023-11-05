@@ -78,8 +78,7 @@ cant_remove_dialog = define_new_dialog('cant_remove_inherited_dialog', 'Security
 cant_remove_dialog.html(`
 <div id="cant_remove_text">
     You can't remove <span id="cant_remove_username_1" class = "cant_remove_username"></span> because this object is inheriting permissions from 
-    its parent. To remove <span id="cant_remove_username_2" class = "cant_remove_username"></span>, you must prevent this object from inheriting permissions.
-    Turn off the option for inheriting permissions, and then try removing <span id="cant_remove_username_3" class = "cant_remove_username"></span>  again.
+    its parent. To remove <span id="cant_remove_username_2" class = "cant_remove_username"></span>, turn OFF the option for inheriting permissions in "Change Permissions", and then try removing <span id="cant_remove_username_3" class = "cant_remove_username"></span>  again.
 </div>`)
 
 // Make a confirmation "are you sure you want to remove?" dialog
@@ -122,12 +121,12 @@ are_you_sure_dialog.text('Do you want to remove permissions for this user?')
 perm_remove_user_button  = $('<button id="perm_remove_user" class="ui-button ui-widget ui-corner-all">Remove</button>')
 perm_remove_user_button.click(function(){
     // Get the current user and filename we are working with:
-    let selected_username = file_permission_users.attr('selected_item')
+    let selected_username = $('.ui-selected').attr('name')
 
     // Get the actual element that we want to remove from the user list:
-    let selected_user_elem = file_permission_users.find('.ui-selected') // find the element inside file_permission_users that has the special class ui-selected (given by jquery-ui selectable widget)
-    let has_inherited_permissions = selected_user_elem.attr('inherited')  === "true" // does it have inherited attribute set to "true"?
-   
+   // let selected_user_elem = file_permission_users.find('.ui-selected') // find the element inside file_permission_users that has the special class ui-selected (given by jquery-ui selectable widget)
+    let has_inherited_permissions = $('.ui-selected').attr('inherited')  === "true" // does it have inherited attribute set to "true"?
+    console.log(selected_username + has_inherited_permissions )
     
     // Check whether it's OK to remove it:
     if(has_inherited_permissions) { 
@@ -307,7 +306,7 @@ function open_advanced_dialog(file_path) {
     })
    
     
-    add_button = define_new_user_select_field("add_user", "add", on_user_change = function(selected_user){
+    add_button = define_new_user_select_field("add_user", "Add", on_user_change = function(selected_user){
         if(selected_user && (selected_user.length > 0) && (selected_user in all_users)) { // sanity check that a user is actually selected (and exists)
 
             let expected_user_elem_id = `permdialog_file_user_${selected_user}`
