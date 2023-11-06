@@ -442,3 +442,32 @@ function validate_and_get_logs() {
         console.log(JSON.stringify(userData));
     }
 }
+
+// User Guide Button
+document.addEventListener("DOMContentLoaded", function () {
+    hide();
+});
+
+function openGuide() {
+    let directionButton = document.getElementById('directions_button');
+    directionButton.addEventListener("click", show);
+}
+
+function show() {
+    let guide = document.getElementById('guide');
+    guide.style.display = 'block';
+}
+
+function hide() {
+    let guide = document.getElementById('guide');
+    guide.style.display = 'none';
+}
+function close() {
+    let closeButton = document.getElementById('close');
+    closeButton.addEventListener('click', function () {
+        hide();
+    });
+}
+
+openGuide();
+close();
