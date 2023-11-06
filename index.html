@@ -177,9 +177,10 @@
                                 inherited from the parent object. Make changes here to override the inherited permissions.</div>
 
                             <!-- user list -->
-                            <span id="perm_entry_name_text">*Please do not change anything here. Go to "Change Permissions" to modify.* 
-                                <br>
-                                Group or User: </span>
+                            <span id="perm_entry_name_text1">*Please do not change anything here. Go to "Change Permissions" to modify.* </span> 
+                            <br>
+                            <br>   
+                            <span id="perm_entry_name_text">Group or User: </span>
                                     <div title="Select Users or Groups" id="user_select_dialog">
                                         <div id="user_select_container_perm"></div>       
                                         <div id = "button"> 
@@ -211,24 +212,23 @@
                     <div id="guideinfo" class="guideInfo">
                         <h2>User Guide:</h2>
                         <br>
-                        <p>The following guide provides information on how to change file permissions.</p>
+                        <h3>How To Change Permissions:</h3>
                         <ul>
-                            <li>Overview: view the permissions each user/group has. You cannot modify any of the permissions, but you can add a user to verify the permissions they have using “add.” You can remove permissions from users using “remove.”</li>
-                            <li>Owner: view and modify owners of the file/folder.</li>
-                            <li>Change Permissions: modify permissions for users/groups using “allow” and “deny.” There are options to (1) include all inheritable permissions and (2) replace all child object permissions with inheritable permissions from this object.</li>
-                            <li>View Permissions: view the inherited permissions on files/folders for users/groups. </li>
-                        </ul>
-                        <br>
-                        <p id="guideBold">How To Change Permissions:</p>
-                        <ul>
-                            <li>Look at all of the direct (i.e., not inherited) permissions set on this file for this user OR for any groups that this user is part of (e.g., employees) in Change Permissions.
+                            <li>Look at all of the direct (i.e., not inherited) permissions set on this file for this user OR for any groups (e.g., employees) in <b>Change Permissions</b>
                                 <ul>
-                                    <li>If any of these are set to deny permission, then permission is denied.</li>
-                                    <li>If any of these are set to allow permission, then the action is allowed.</li>
+                                    <li>If set to deny permission, then permission is denied.</li>
+                                    <li>If set to allow permission, then the action is allowed.</li>
                                 </ul>
                             </li>
-                            <li>If (a) there were no direct permissions for this [user, action] combination, AND (b) inheritance is turned on for this file/folder (see checkbox under), repeat the process using the permissions for the parent folder.</li>
-                            <li>If you have exhausted the options available via inheritance and still have not found any relevant permission settings, then permission is denied.</li>
+                            <li>If (a) there were no direct permissions for this [user, action], <b>AND</b> (b) inheritance is turned on, repeat this process for the parent folder.</li>
+                            <li>If you have exhausted the options available and still have not found any settings, then permission is denied.</li>
+                        </ul>
+                        <br>
+                        <ul>
+                            <li><b>Overview:</b> view the permissions each user/group has. You cannot modify any of the permissions, but you can add a user to verify the permissions they have using “add" or "remove"</li>
+                            <li><b>Owner:</b> view and modify owners of the file/folder.</li>
+                            <li><b>Change Permissions:</b> modify permissions for users/groups using “allow” and “deny.” There are options to (1) include all inheritable permissions and (2) replace all child object permissions with inheritable permissions from this object.</li>
+                            <li><b>View Permissions:</b> view the inherited permissions on files/folders for users/groups. </li>
                         </ul>
                     </div>
                     <button id="close" class="close-button">&#x2715;</button>

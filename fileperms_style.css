@@ -76,6 +76,13 @@
     font-weight: bold;
     margin-bottom: 10px;
 }
+#perm_entry_name_text1{
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: red;
+}
 
 #adv_owner_current_owner, #selected_user, #adv_effective_current_user{
     display: inline-block;

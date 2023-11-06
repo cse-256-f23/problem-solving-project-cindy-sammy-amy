@@ -444,9 +444,9 @@ function validate_and_get_logs() {
 }
 
 // User Guide Button
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     hide();
-});
+});*/
 
 function openGuide() {
     let directionButton = document.getElementById('directions_button');
