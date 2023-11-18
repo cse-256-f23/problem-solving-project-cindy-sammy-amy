@@ -52,7 +52,7 @@
 }
 
 #ui-id-81{
-    margin-top: 50px; 
+    /*margin-top: 50px;*/
     /* height: 550px; */
     overflow-y: clip;
 }
@@ -161,17 +161,19 @@
 .guide{
     position: fixed;
     top: 50px;
-    bottom: 50px;
+    bottom: 10px;
     right: 0;
     width: 500px;
     z-index: 999;
     border: 1px solid black;
     background-color: #fafafa;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .guideInfo{
     position: absolute;
     top: 50px;
-    right: 10px;
+    right: 20px;
     width: 450px;
     height: 100%;
 }
@@ -186,4 +188,16 @@
     border: none;
     color: black;
     background: #fafafa;
+}
+.guide li > ul {
+    padding-left: 30px;
+}
+#clue{
+    margin: 0;
+}
+.guide h2{
+    text-align: center;
+}
+.guide a{
+    text-decoration: none;
 }

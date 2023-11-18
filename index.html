@@ -210,26 +210,107 @@
                 <!-- structure for the user guide: -->
                 <div id="guide" class="guide">
                     <div id="guideinfo" class="guideInfo">
-                        <h2>User Guide:</h2>
+                        <h2>User Guide</h2>
                         <br>
-                        <h3>How To Change Permissions:</h3>
+                        <h3>Tab Overview</h3>
                         <ul>
-                            <li>Look at all of the direct (i.e., not inherited) permissions set on this file for this user OR for any groups (e.g., employees) in <b>Change Permissions</b>
+                            <li><b>Owner:</b> view and modify owners of the file/folder</li>
+                            <li><b>Change Permissions:</b> modify permissions for users/groups using “allow” and “deny.” You can also:
+                            <ul>
+                                <li>Include inheritable permissions from this object's parent</li>
+                                <li>Replace all child object permissions with inheritable permissions from this object</li>
+                            </ul>
+                            </li>
+                            <li><b>View Permissions:</b> view the <u>inherited</u> permissions on files/folders for users/groups.</li>
+                        </ul>
+                        <br>
+
+                        <h3>Preparation</h3>
+                        <ol>
+                            <li>Read the prompt and determine:
                                 <ul>
-                                    <li>If set to deny permission, then permission is denied.</li>
-                                    <li>If set to allow permission, then the action is allowed.</li>
+                                    <li>Which file or folder do you need to modify permissions for?</li>
+                                    <li>Which user or group?</li>
+                                    <li>Which permissions? Is it a selected few (read, write, etc.) or all the permissions?</li>
                                 </ul>
                             </li>
-                            <li>If (a) there were no direct permissions for this [user, action], <b>AND</b> (b) inheritance is turned on, repeat this process for the parent folder.</li>
-                            <li>If you have exhausted the options available and still have not found any settings, then permission is denied.</li>
-                        </ul>
+                            <li>Find the appropriate file/folder and click on the Permissions lock button</li>
+                            <li>Reveiew “Owners” and “View Inheritance” and consider what you see for the next step</li>
+                            <li><b>Modify permissions for the user/group in Change Permissions (see specific instructions for each type of modification below)</b>
+                                <ul>
+                                    <li><a href="#add">Add permissions</a></li>
+                                    <li><a href="#remove">Remove permission</a></li>
+                                    <li><a href="fix">Fix permission</a></li>
+                                </ul>
+                            </li>
+                        </ol>
                         <br>
-                        <ul>
-                            <li><b>Overview:</b> view the permissions each user/group has. You cannot modify any of the permissions, but you can add a user to verify the permissions they have using “add" or "remove"</li>
-                            <li><b>Owner:</b> view and modify owners of the file/folder.</li>
-                            <li><b>Change Permissions:</b> modify permissions for users/groups using “allow” and “deny.” There are options to (1) include all inheritable permissions and (2) replace all child object permissions with inheritable permissions from this object.</li>
-                            <li><b>View Permissions:</b> view the inherited permissions on files/folders for users/groups. </li>
-                        </ul>
+
+                        <h3 id="add">Add Permission</h3>
+                        <ol>
+                            <li>Does the user already have access to the file/folder?
+                                <ul>
+                                    <li>If so, proceed to next step</li>
+                                    <li>If not, go to “Change Permissions” to add the user/group or go to “Owner” to make the user/group the owner</li>
+                                </ul>
+                            </li>
+                            <li>Go to “Change Permissions”, click “allow” to add the direct permissions specified in the prompt AND consider the following:
+                                <ul>
+                                    <li>Are there inherited permissions (light gray checkboxes)?
+                                        <ul>
+                                            <li>If not, consider adding “include inheritable permissions from this object's parent” OR “replace all child object permissions with inheritable permissions from this object”</li>
+                                        </ul>
+                                    </li>
+                                    <li>Is the user part of a greater group (e.g. employees)?
+                                        <ul>
+                                            <li>If so, modify permissions for the group in “Change Permissions”</li>
+                                            <li>If not (individual user), modify permisisons for the individual</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
+
+                        <h3 id="remove">Remove Permission</h3>
+                        <ol>
+                            <li>Do you need to remove all (not some) permissions?
+                                <ul>
+                                    <li>If so, remove the user/group entirely in “Change Permissions” or change the owner in “Owner”</li>
+                                </ul>
+                            </li>
+                            <li>Go to “Change Permissions”, click “deny” to remove the direct permissions specified in the prompt AND consider the following:
+                                <ul>
+                                    <li>Are there inherited permissions (light gray checkboxes)?
+                                        <ul>
+                                            <li>If there are and “include inheritable permissions from this object's parent” OR “replace all child object permissions with inheritable permissions from this object” is checked off, consider unchecking the box to modify specific permissions for the user</li>
+                                        </ul>
+                                    </li>
+                                    <li>Is the user part of a greater group (e.g. employees)?
+                                        <ul>
+                                            <li>If so, remove permissions for the group in “Change Permissions”</li>
+                                            <li>If not (individual user), remove permisisons for the individual</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
+
+                        <h3 id="fix">Fix Permission</h3>
+                        <ol>
+                            <li>Determine where the problem lies — do you need to add or remove permissions?
+                                <ul>
+                                    <li>Clues: are they able to modify something they are not supposed to? Or are they not able to modify something they should be able to?</li>
+                                </ul>
+                            </li>
+                            <li>Go to either Add Permissions or Remove Permissions
+                                <ul>
+                                    <li><b>Pay special attention to the “consider the following” options</b></li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
                     </div>
                     <button id="close" class="close-button">&#x2715;</button>
                 </div>
