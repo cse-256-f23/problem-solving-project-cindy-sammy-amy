@@ -210,12 +210,13 @@
                         <br>
                         <h3>Tab Overview</h3>
                         <ul>
-                            <li><b>Owner:</b> view and modify owners of the file/folder</li>
+                            
                             <li><b>Change Permissions:</b> modify permissions for users/groups using “allow” and “deny.” You can also:
                             <ul>
                                 <li>Include inheritable permissions from this object's parent</li>
                                 <li>Replace all child object permissions with inheritable permissions from this object</li>
                             </ul>
+                            <li><b>Owner:</b> view and modify owners of the file/folder</li>
                             </li>
                             <li><b>View Permissions:</b> view the <u>inherited</u> permissions on files/folders for users/groups.</li>
                         </ul>
@@ -244,12 +245,14 @@
 
                         <h3 id="add">Add Permission</h3>
                         <ol>
-                            <li>Does the user need full permission? Do they not have access to the file/folder?  
+                            <li>Does the user need access to the file/folder?  
                                 <ul>
-                                    <li>If so, go to “Change Permissions” and add <b>ALL permissions EXCEPT</b> "traverse folder/execute file," "change permission," and "take ownership"</li>
-                                    <li>If not, proceed to next step</li>
+                                    <li>If they need <b>normal access</b> (for example, new users), go to “Change Permissions” and add ALL permissions <b>EXCEPT</b> "traverse folder/execute file," "change permission," and "take ownership"</li>
+                                    <li>If they need <b>full access</b>, go to “Change Permissions” and add ALL permissions
+                                    <li>Otherwise, go to the next step</li>
                                 </ul>
                             </li>
+                            
                             <li>Go to “Change Permissions”, click “allow” to add the direct permissions specified in the prompt AND consider the following:</li>
                                 <ul>
                                     <li>Are there inherited permissions (see Inherited Permission)?
@@ -272,7 +275,7 @@
                         <ol>
                             <li>Do you need to remove all (not some) permissions?
                                 <ul>
-                                    <li>If so, remove the user/group entirely in “Change Permissions” or change the owner in “Owner”</li>
+                                    <li>If so, remove the user/group entirely in “Change Permissions”</li>
                                 </ul>
                             </li>
                             <li>Go to “Change Permissions”, click “deny” to remove the direct permissions specified in the prompt AND consider the following:
