@@ -403,7 +403,7 @@ $( "#advtabs" ).tabs({
     heightStyle: 'fill'
 });
 let adv_contents = $(`#advdialog`).dialog({
-    position: { my: "top", at: "top", of: $('#html-loc') },
+    position: { my: "left+15 top+10", at: "left top", of: $('#html-loc') },
     width: 700,
     height: 550,
     modal: true,
