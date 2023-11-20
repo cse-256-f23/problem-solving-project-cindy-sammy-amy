@@ -105,7 +105,7 @@
                                     <div id="directions">
                                         <button class = "ui-button ui-widget ui-corner-all" id = "directions_button" style="float:right; width: 150px; margin-top:50px;">File Permissions User Guide</button>
                                     </div>
-                                    <span id="perm_entry_name_text" style="margin-bottom: 20px;">Group or User: </span>
+                                    <span id="perm_entry_name_text" style="margin-bottom: 20px;"><b id="red">SELECT</b> Group or User: </span>
                                     <div title="Select Users or Groups" id="user_select_dialog">
                                         <div id="user_select_container"></div>
                                     </div>
@@ -236,7 +236,7 @@
                                 <ul>
                                     <li><a href="#add">Add permissions</a></li>
                                     <li><a href="#remove">Remove permission</a></li>
-                                    <li><a href="fix">Fix permission</a></li>
+                                    <li><a href="#fix">Fix permission</a></li>
                                 </ul>
                             </li>
                         </ol>
@@ -244,15 +244,15 @@
 
                         <h3 id="add">Add Permission</h3>
                         <ol>
-                            <li>Does the user already have access to the file/folder?
+                            <li>Does the user need full permission? Do they not have access to the file/folder?  
                                 <ul>
-                                    <li>If so, proceed to next step</li>
-                                    <li>If not, go to “Change Permissions” to add the user/group or go to “Owner” to make the user/group the owner</li>
+                                    <li>If so, go to “Change Permissions” and add <b>ALL permissions EXCEPT</b> "traverse folder/execute file," "change permission," and "take ownership"</li>
+                                    <li>If not, proceed to next step</li>
                                 </ul>
                             </li>
-                            <li>Go to “Change Permissions”, click “allow” to add the direct permissions specified in the prompt AND consider the following:
+                            <li>Go to “Change Permissions”, click “allow” to add the direct permissions specified in the prompt AND consider the following:</li>
                                 <ul>
-                                    <li>Are there inherited permissions (light gray checkboxes)?
+                                    <li>Are there inherited permissions (see Inherited Permission)?
                                         <ul>
                                             <li>If not, consider adding “include inheritable permissions from this object's parent” OR “replace all child object permissions with inheritable permissions from this object”</li>
                                         </ul>
@@ -277,7 +277,7 @@
                             </li>
                             <li>Go to “Change Permissions”, click “deny” to remove the direct permissions specified in the prompt AND consider the following:
                                 <ul>
-                                    <li>Are there inherited permissions (light gray checkboxes)?
+                                    <li>Are there inherited permissions (see Inherited Permission)?
                                         <ul>
                                             <li>If there are and “include inheritable permissions from this object's parent” OR “replace all child object permissions with inheritable permissions from this object” is checked off, consider unchecking the box to modify specific permissions for the user</li>
                                         </ul>

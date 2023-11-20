@@ -120,6 +120,7 @@
     display: inline-block;
     float:left;
     margin-right: 10px;
+    overflow-x: hidden;
 }
 
 #perm_entry_table{
@@ -143,6 +144,15 @@
 #user_select_container_perm{
     height: 90px;
     overflow-y: scroll;
+}
+
+#user_select_all_users{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#user_select_all_users:hover {
+    filter: grayscale(100%);
 }
 
 #add_explain{
@@ -206,4 +216,7 @@
 
 #filestructure{
     font-size: large;
+}
+#red{
+    color: red;
 }
