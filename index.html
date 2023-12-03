@@ -100,48 +100,41 @@
                                 
                         </ul>
                         <div id="adv_permissions_tab">
-                            <div id="adv_perm_object_name" class="section">Object Name: <span
-                                    id="adv_perm_filepath"></span></div>
-                                    <div id="directions">
-                                        <button class = "ui-button ui-widget ui-corner-all" id = "directions_button" style="float:right; width: 150px; margin-top:50px;">File Permissions User Guide</button>
-                                    </div>
-                                    <span id="perm_entry_name_text" style="margin-bottom: 20px;"><b id="red">SELECT</b> Group or User: </span>
-                                    <div title="Select Users or Groups" id="user_select_dialog">
-                                        <div id="user_select_container"></div>
-                                    </div>
-                                    <div id="adv_perm_inheritance_div">
-                                        <input type="checkbox" id="adv_perm_inheritance" name="inherit">
-                                        <label for="adv_perm_inheritance" id="adv_perm_inheritance_label">Include inheritable
-                                            permissions from this object's parent</label>
-                                    </div>
-                                    <div id="adv_perm_replace_child_div">
-                                        <input type="checkbox" id="adv_perm_replace_child_permissions" name="replace_child">
-                                        <label for="adv_perm_replace_child_permissions"
-                                            id="adv_perm_replace_child_permissions_label">Replace all child object permissions
-                                            with inheritable permissions from this object</label>
-                                    </div>
-                                    <p>Permissions for: 
-                                        <span id="selected_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span>
-                                    </p>
-                                <div id = "perm_table_container">
-                                    <table id="perm_entry_table" class="ui-widget-content section">
-                                        <tr id="perm_entry_header">
-                                            <th id="perm_entry_header_p" width = "50%">Permissions</th>
-                                            <th id="perm_entry_header_allow">Allow</th>
-                                            <th id="perm_entry_header_deny">Deny</th>
-                                            <th id="perm_entry_header_inherited">Inherited?</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                            
-                            
-                            
+                            <div id="adv_perm_object_name" class="section">Editing permissions of: <b><span
+                                    id="adv_perm_filepath"></span></b></div>
+                            <span id="perm_entry_name_text" style="margin-bottom: 20px;"><b id="red">SELECT</b> Group or User: </span>
+                            <div title="Select Users or Groups" id="user_select_dialog">
+                                <div id="user_select_container"></div>
+                            </div>
+                            <div id="adv_perm_inheritance_div">
+                                <input type="checkbox" id="adv_perm_inheritance" name="inherit">
+                                <label for="adv_perm_inheritance" id="adv_perm_inheritance_label">Inherit (take on) permissions from parent</label><button id="learn_inherit">?</button>
+                            </div>
+                            <div id="adv_perm_replace_child_div">
+                                <input type="checkbox" id="adv_perm_replace_child_permissions" name="replace_child">
+                                <label for="adv_perm_replace_child_permissions"
+                                    id="adv_perm_replace_child_permissions_label">Replace children's permissions with these inheritable permissions</label><button id="learn_replace">?</button>
+                            </div>
+                            <p>Permissions for: 
+                                <b><span id="selected_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span></b>
+                            </p>
+                            <div id = "perm_table_container">
+                                <table id="perm_entry_table" class="ui-widget-content section">
+                                    <tr id="perm_entry_header">
+                                        <th id="perm_entry_header_p" width = "50%">Permissions</th>
+                                        <th id="perm_entry_header_allow">Allow</th>
+                                        <th id="perm_entry_header_deny">Deny</th>
+                                        <th id="perm_entry_header_inherited">Inherited?</th>
+                                    </tr>
+                                </table>
+                            </div>  
                         </div>
+                        <!--Owner tab-->
                         <div id="adv_owner_tab">
                             <div id="adv_owner_explanation" class="section">You can take or assign ownership of this
                                 object if you have the required permissions or privileges.</div>
-                            <div id="adv_owner_object_name" class="section">Object Name: <span
-                                    id="adv_owner_filepath"></span></div>
+                            <div id="adv_owner_object_name" class="section">Editing owner of: <b><span
+                                    id="adv_owner_filepath"></span></b></div>
                             <div id="adv_owner_current_owner_text">Current owner:
                                 <p id="adv_owner_current_owner" class="ui-widget-content section" style="display: inline-block; padding: 5px; "></p>
                             </div>
@@ -150,11 +143,12 @@
                             <button id="adv_owner_change_button" class="ui-button ui-widget ui-corner-all"> Confirm Change</button>
                             
                         </div>
+                        <!--View Inheritance -->
                         <div id="adv_effective_tab">
                             <div id="inheritance_explaination" class="section">This tab allows you to view the inherited permissions on files/folders. A file/folder may inherit permissions from its parent folder. By default, this inheritance is on for all files/folders. But it is possible to turn off inheritance for a particular file/folder in the Change Permissions tab.
                             </div>
-                            <div id="adv_effective_object_name" class="section">Object Name: <span
-                                    id="adv_effective_filepath"></span></div>
+                            <div id="adv_effective_object_name" class="section">Viewing permissions of: <b><span
+                                    id="adv_effective_filepath"></span></b></div>
                             <div id="adv_effective_user_text">Group or user name:</div>
 
 
@@ -162,7 +156,7 @@
                                 <div id="user_select_container_effective"></div>
                             </div>
                             <p>Permissions for: 
-                                <span id="adv_effective_current_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span>
+                                <b><span id="adv_effective_current_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span></b>
                             </p>
 
 
@@ -170,44 +164,33 @@
                             <div id="adv_effective_effective_list" class="ui-widget-content"
                                 style="height:250px;overflow-y:scroll"></div>
                         </div>
-
-                        <!-- overview tab -->
-                        <div id="permentry_tab">
-                            <div id="perm_entry_inheritance_explanation" style="display: none;" class="section">This permission is
-                                inherited from the parent object. Make changes here to override the inherited permissions.</div>
-
-                            <!-- user list -->
-                           
-                            <span id="perm_entry_name_text">Group or User: </span>
-                                    <div title="Select Users or Groups" id="user_select_dialog">
-                                        <div id="user_select_container_perm"></div>       
-                                        <div id = "button"> 
-                                            <p id = "add_explain">Add or Remove a user to add/remove permissions.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p style="display: inline-block;">Basic Permissions for: 
-                                        <span id="selected_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span>
-                                    </p>
-
-
-                            <table id="perm_entry_table" class="ui-widget-content section" style="display:inline-block; float: left;">
-                                <tr id="perm_entry_header">
-                                    <th id="perm_entry_header_p" width="99%">Basic Permissions</th>
-                                    <th id="perm_entry_header_allow">Allow</th>
-                                    <th id="perm_entry_header_deny">Deny</th>
-                                </tr>
-                            </table>
-                            
-                        </div>
                     </div>
                 </div>
 
                 <!-- structure for the user guide: -->
                 <div id="guide" class="guide">
                     <div id="guideinfo" class="guideInfo">
-                        <h2>User Guide</h2>
+
+                       <h1>User Guide</h1>
                         <br>
+                        <p> <b>Step 1: </b>Click on the name of the <u>file</u> or <u>folder</u> you want to edit.</p>
+                        <br>
+                        <p> <b>Step 2: </b>Select the user whose permissions you want to edit.</p>
+                        <br>
+                        <p><b>Step 3: </b>Check "Allow" or "Deny" for each permission you want to change. </p>
+                        <ul class = "indent">
+                            <li>If both are checked, "Deny" overrides "Allow"</li>
+                            <li>If neither is checked, permissions are <u>denied</u></li>
+                            <li>Don't touch the "extra" permissions unless specifically told (i.e. giving someone "complete" permission)</li>
+                        </ul>
+                        <br>
+                        <p><b>Step 4 </b>(skip if user is <u>not</u> part of a GROUP): Select the group (i.e. students or employees) from the list to see it's permissions. Users in the group take on those permissions</p>
+                        <p>
+                        <ul class = "indent">
+                            <li><b>Hint: </b> Check "View Inheritance" tab to see which permissions are being granted to a given user</p></li>
+                        </div>
+                        
+                        <!--  <br>
                         <h3>Tab Overview</h3>
                         <ul>
                             
@@ -309,9 +292,8 @@
                                 </ul>
                             </li>
                         </ol>
-                        <br>
+                        <br> -->
                     </div>
-                    <button id="close" class="close-button">&#x2715;</button>
                 </div>
 
                 <!-- structure for the User Select dialog: -->

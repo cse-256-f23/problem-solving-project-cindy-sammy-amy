@@ -2,6 +2,39 @@
 // ---- Most functions have a required "id_prefix" parameter: you need to specify unique ids that will be used in the HTML, 
 // ---- so that we can tell from the logs what was actually clicked on.
 
+let inherit_checkbox = document.getElementById('learn_inherit');
+inherit_checkbox.addEventListener('click', function () {
+    inherit_dialog = define_new_dialog("inherit_dialog", title='Inheriting from parent', options = {
+        position: { my: "top+40", at: "top", of: $('#html-loc') },
+        height: 250,
+        width: 300,  
+    })
+    inherit_dialog.dialog('open')
+    inherit_dialog.html(`
+        <div id="inherit_dialog_text">
+            Checking this box will set the permissions for ALL users to be the same as the permissions of the folder you're in. <br>
+            If the box is already checked, go to "View Inheritance" to see how the parent permissions are effecting the permissions you see below!
+        </div>`)
+        
+});    
+
+let replace_checkbox = document.getElementById('learn_replace');
+replace_checkbox.addEventListener('click', function () {
+    replace_dialog = define_new_dialog("replace_dialog", title='Replacing child permissions', options = {
+        position: { my: "top+40", at: "top", of: $('#html-loc') },
+        height: 250,
+        width: 300,  
+    })
+    replace_dialog.dialog('open')
+    replace_dialog.html(`
+        <div id="replace_dialog_text">
+            Checking this box will set the permissions for every file/folder within <i>this</i> folder to the permissions of <i>this</i> folder for ALL users. <br>
+            You shoudl do this if you want all files within this folder to have the same permissions!
+        </div>`)
+        
+});    
+
+
 
 // --- helper functions for connecting things with events ---
 
@@ -99,6 +132,8 @@ function define_new_dialog(id_prefix, title='', options = {}){
     return dialog
 }
 
+
+
 // Define a generic list which allows you to select one of the items, and propagates that item's 'name' attribute to its own 'selected_item' attribute.
 // Note: each selectable item in the list is expted to have a 'name' attribute.
 // creates and returns a custom jquery-ui selectable (https://jqueryui.com/selectable/).
@@ -157,6 +192,7 @@ function define_new_effective_permissions(id_prefix, add_info_col = false, which
     }
     // add a row for each permission:
     for(let p of which_permissions) {
+        
         let p_id = p.replace(/[ \/]/g, '_') //get jquery-readable id
         let row = $(`
         <tr id="${id_prefix}_row_${p_id}" permission_name="${p}" permission_id="${p_id}">
@@ -290,7 +326,7 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
     //Update permissions when checkbox is clicked:
     group_table.find('.groupcheckbox').change(function(){
         toggle_permission_group( group_table.attr('filepath'), $(".ui-selected").attr('name'), $(this).attr('group'), $(this).attr('ptype'), $(this).prop('checked'))
-        update_group_checkboxes()// reload checkboxes
+       update_group_checkboxes()// reload checkboxes
     })
 
     return group_table
@@ -302,8 +338,7 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
     let perm_table = $(`
     <table id="${id_prefix}" id = "permtable_2" class="ui-widget-content" width="100%">
         <tr id="${id_prefix}_header">
-            <th id="${id_prefix}_header_p" width="99%">Permissions for <span id="${id_prefix}_header_username"></span>
-            </th>
+            <th id="${id_prefix}_header_p" width="99%">Normal permissions</th>
             <th id="${id_prefix}_header_allow">Allow  </th>
             <th id="${id_prefix}_header_deny">Deny  </th>
             <th id="${id_prefix}_header_inherited">Inherited?</th>
@@ -316,10 +351,14 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
         which_permissions = Object.values(permissions)
     }
     // For each type of permission, create a row:
+
     for(let p of which_permissions){
         let p_id = p.replace(/[ \/]/g, '_') 
+
+        //divide permissions into normal and advanced
+       
         let row = $(`<tr id="${id_prefix}_row_${p_id}">
-            <td id="${id_prefix}_${p_id}_name">${p}</td>
+        <td id="${id_prefix}_${p_id}_name">${p}</td>
         </tr>`)
         // Add allow and deny checkboxes:
         for(let ace_type of ['allow', 'deny']) {
@@ -328,8 +367,36 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
             </td>`)        
         }
 
-        row.append(`<p id="${id_prefix}_${p_id}_is_inherited">N/A</p>`)
-        perm_table.append(row)
+        if(p_id == "change_permissions"){     
+            //let row1 = $(`<tr><td style="color:white;">   .</td> </tr>`)
+            let row2 = $(`<tr id="${id_prefix}_header">
+                <th id="${id_prefix}_header_p" width="99%"><u>Extra</u> permissions</th>
+                <th id="${id_prefix}_header_allow">Allow  </th>
+                <th id="${id_prefix}_header_deny">Deny  </th>
+                <th id="${id_prefix}_header_inherited">Inherited?</th></tr>`)
+            let row3 = $(`<tr id="${id_prefix}_row_traverse_folder_execute_file">
+                <td id="${id_prefix}_traverse_folder_execute_file_name">traverse folder/execute file</td>
+                </tr>`)
+                // Add allow and deny checkboxes:
+                for(let ace_type of ['allow', 'deny']) {
+                    row3.append(`<td id="${id_prefix}_traverse_folder_execute_file_${ace_type}_cell">
+                        <input type="checkbox" id="${id_prefix}_traverse_folder_execute_file_${ace_type}_checkbox" ptype="${ace_type}" class="perm_checkbox" permission="traverse folder/execute file" ></input>
+                    </td>`)        
+                }
+                row3.append(`<p id="${id_prefix}_traverse_folder_execute_file_is_inherited">N/A</p>`)
+          //  perm_table.append(row1)
+            perm_table.append(row2)
+            perm_table.append(row3)
+        }
+        if(p_id != "traverse_folder_execute_file"){  
+            row.append(`<p id="${id_prefix}_${p_id}_is_inherited">N/A</p>`)     
+            perm_table.append(row)
+        }
+
+            
+    
+
+       
     }
 
     perm_table.find('.perm_checkbox').prop('disabled', true)// disable all checkboxes to start
@@ -395,10 +462,10 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
     $('#adv_perm_inheritance').change(function(){
         toggle_permission( perm_table.attr('filepath'), perm_table.attr('username'), $(this).attr('permission'), $(this).attr('ptype'), $(this).prop('checked'))
         
-       console.log("hello")
+  
        $('#adv-inheritance-add-button').click(function(){
             update_perm_table()
-            console.log("here")
+ 
         })
    })
 

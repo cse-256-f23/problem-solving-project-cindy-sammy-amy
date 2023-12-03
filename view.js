@@ -12,9 +12,9 @@ function make_file_element(file_obj) {
  
         let folder_elem = $(`<div class='folder' id="${file_hash}_div">
             <h3 id="${file_hash}_header">
-                <span class="oi oi-folder" id="${file_hash}_icon"/> ${file_obj.filename} 
-                <button style = 'margin-left: 20px' class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
-                    <p>Folder Permissions <span class="oi oi-lock-unlocked" id="${file_hash}_permicon"/> </p>
+                
+                <button style = ' margin: 5px; padding: 7px;'  class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
+                    <p> <span class="oi oi-folder" id="${file_hash}_icon"/> <b> ${file_obj.filename} </b></p>
                 </button>
             </h3>
         </div>`)
@@ -33,9 +33,9 @@ function make_file_element(file_obj) {
     
     else {
         return $(`<div class='file'  id="${file_hash}_div">
-            <span class="oi oi-file" id="${file_hash}_icon"/> ${file_obj.filename}
-            <button style = 'margin-left: 20px' class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
-                <p>File Permissions <span class="oi oi-lock-unlocked" id="${file_hash}_permicon"/> </p>
+            
+            <button style = ' margin: 5px; padding: 7px;' class="ui-button ui-widget ui-corner-all permbutton" path="${file_hash}" id="${file_hash}_permbutton"> 
+                <p><span class="oi oi-file" id="${file_hash}_icon"/> <b> ${file_obj.filename} </b> </p>
             </button>
         </div>`)
     }

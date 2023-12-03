@@ -245,9 +245,9 @@ function open_advanced_dialog(file_path) {
     let file_obj = path_to_file[file_path]
 
     // set file path in UI:
-    $('#adv_perm_filepath').text(file_path);
-    $('#adv_owner_filepath').text(file_path);
-    $('#adv_effective_filepath').text(file_path);
+    $('#adv_perm_filepath').text(file_obj.filename);
+    $('#adv_owner_filepath').text(file_obj.filename);
+    $('#adv_effective_filepath').text(file_obj.filename);
     $('#advdialog').attr('filepath', file_path);
 
     // clear dynamic content:
@@ -404,7 +404,7 @@ $( "#advtabs" ).tabs({
 });
 let adv_contents = $(`#advdialog`).dialog({
     position: { my: "left+15 top+10", at: "left top", of: $('#html-loc') },
-    width: 700,
+    width: "55%",
     height: 550,
     modal: true,
     autoOpen: false,
@@ -431,20 +431,24 @@ $("#adv_effective_user_select").click(function(event){
 $('#adv_perm_inheritance').change(function(){
     let filepath = $('#advdialog').attr('filepath')
     let file_obj = path_to_file[filepath]
+    let user = $('#user_select_container').attr('username')
+
     if( $('#adv_perm_inheritance').prop('checked')) {
         // has just been turned on
         file_obj.using_permission_inheritance = true
         emitState()
         open_advanced_dialog(filepath) // reload/reopen dialog
+        
         perm_dialog.attr('filepath', filepath) // force reload 'permissions' dialog
+        $('#permdialog_individual_permissions').attr('username', user)
     }
     else {
         // has just been turned off - pop up dialog with add/remove/cancel
         $(`<div id="add_remove_cancel" title="Security">
-            Warning: if you proceed, inheritable permissions will no longer propagate to this object.<br/>
-            - Click Add to convert and add inherited parent permissions as explicit permissions on this object<br/>
-            - Click Remove to remove inherited parent permissions from this object<br/>
-            - Click Cancel if you do not want to modify inheritance settings at this time.<br/>
+            Warning: if you proceed, this file/folder will no longer be sycned with it's parent's permissions<br/>
+            - Click Add to keep currently inherited permissions on this object<br/>
+            - Click Remove to remove currently inherited permissions from this object<br/>
+            - Click Cancel if you do not want to modify inheritance settings.<br/>
         </div>`).dialog({ // TODO: don't create this dialog on the fly
             modal: true,
             width: 400,
@@ -497,7 +501,7 @@ $('#adv_perm_replace_child_permissions').change(function(){
         let filepath = $('#advdialog').attr('filepath')
         let file_obj = path_to_file[filepath]
         $(`<div id="replace_perm_dialog" title="Security">
-            This will replace explicitly defined permissions on all descendants of this object with inheritable permissions from ${file_obj.filename}.<br/>
+            This will replace explicitly defined permissions on anything in this folder with permissions from ${file_obj.filename}. Item <i>must</i> be a folder to continue.<br/>
             Do you wish to continue?
         </div>`).dialog({
             modal: true,
