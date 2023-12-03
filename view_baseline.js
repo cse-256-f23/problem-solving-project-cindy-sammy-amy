@@ -464,7 +464,9 @@ $('#adv_perm_inheritance').change(function(){
                         convert_parent_permissions(file_obj)
                         open_advanced_dialog(filepath) // reload/reopen 'advanced' dialog
                         perm_dialog.attr('filepath', filepath) // force reload 'permissions' dialog
+                        $('#permdialog_individual_permissions').attr('username', user)
                         $( this ).dialog( "close" );
+                        
                     },
                 },
                 Remove: {
@@ -477,6 +479,7 @@ $('#adv_perm_inheritance').change(function(){
                         emitState()
                         open_advanced_dialog(filepath) // reload/reopen 'advanced' dialog
                         perm_dialog.attr('filepath', filepath) // force reload 'permissions' dialog
+                        $('#permdialog_individual_permissions').attr('username', user)
                         $( this ).dialog( "close" );
                     },
                 },

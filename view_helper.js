@@ -464,7 +464,7 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
         
   
        $('#adv-inheritance-add-button').click(function(){
-            update_perm_table()
+          update_perm_table()
  
         })
    })
