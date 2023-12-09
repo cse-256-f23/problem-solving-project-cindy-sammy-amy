@@ -91,14 +91,14 @@
                 <!-- structure for the Advanced dialog: -->
                 <div title="Security Settings" id="advdialog" style="overflow-y: scroll; height: 750px; ">
                     <div id="advtabs">
-                        <ul id="advtabs_titles">
+                        <!-- <ul id="advtabs_titles">
                             <li id="advtab_title_permissions"><a href="#adv_permissions_tab"
                                 id="adv_permissions_tab_elem">Change Permissions</a></li>
                             <li id="advtab_title_owner"><a href="#adv_owner_tab" id="adv_owner_tab_elem">Owner</a></li>
                             <li id="advtab_title_effective"><a href="#adv_effective_tab"
                                     id="adv_effective_tab_elem">View Inheritance</a></li>
                                 
-                        </ul>
+                        </ul> -->
                         <div id="adv_permissions_tab">
                             <div id="adv_perm_object_name" class="section">Editing permissions of: <b><span
                                     id="adv_perm_filepath"></span></b></div>
@@ -124,45 +124,22 @@
                                         <th id="perm_entry_header_p" width = "50%">Permissions</th>
                                         <th id="perm_entry_header_allow">Allow</th>
                                         <th id="perm_entry_header_deny">Deny</th>
-                                        <th id="perm_entry_header_inherited">Inherited?</th>
+                                        <th id="perm_entry_header_inherited">Final</th>
                                     </tr>
                                 </table>
                             </div>  
                         </div>
-                        <!--Owner tab-->
-                        <div id="adv_owner_tab">
-                            <div id="adv_owner_explanation" class="section">You can take or assign ownership of this
-                                object if you have the required permissions or privileges.</div>
-                            <div id="adv_owner_object_name" class="section">Editing owner of: <b><span
-                                    id="adv_owner_filepath"></span></b></div>
-                            <div id="adv_owner_current_owner_text">Current owner:
-                                <p id="adv_owner_current_owner" class="ui-widget-content section" style="display: inline-block; padding: 5px; "></p>
-                            </div>
-                            <div id="adv_owner_change_owner_text">Change owner to:</div>
-                            <div id="adv_owner_user_list"></div>
-                            <button id="adv_owner_change_button" class="ui-button ui-widget ui-corner-all"> Confirm Change</button>
-                            
-                        </div>
+                        
                         <!--View Inheritance -->
                         <div id="adv_effective_tab">
-                            <div id="inheritance_explaination" class="section">This tab allows you to view the inherited permissions on files/folders. A file/folder may inherit permissions from its parent folder. By default, this inheritance is on for all files/folders. But it is possible to turn off inheritance for a particular file/folder in the Change Permissions tab.
-                            </div>
-                            <div id="adv_effective_object_name" class="section">Viewing permissions of: <b><span
-                                    id="adv_effective_filepath"></span></b></div>
-                            <div id="adv_effective_user_text">Group or user name:</div>
+                        
 
 
-                            <div title="Select Users or Groups" style= 'height: 100px;'>
-                                <div id="user_select_container_effective"></div>
-                            </div>
-                            <p>Permissions for: 
-                                <b><span id="adv_effective_current_user" class="ui-widget-content section" style="width:200px;display:inline-block;"></span></b>
+
+                            <p>
+                                <b><span id="adv_effective_current_user" style="display:none;"></span></b>
                             </p>
 
-
-                            <div id="adv_effective_effective_text">Effective permissions:</div>
-                            <div id="adv_effective_effective_list" class="ui-widget-content"
-                                style="height:250px;overflow-y:scroll"></div>
                         </div>
                     </div>
                 </div>
@@ -181,14 +158,13 @@
                         <ul class = "indent">
                             <li>If both are checked, "Deny" overrides "Allow"</li>
                             <li>If neither is checked, permissions are <u>denied</u></li>
-                            <li>Don't touch the "extra" permissions unless specifically told (i.e. giving someone "complete" permission)</li>
+                            <li>Don't touch the "admin" permissions unless specifically told (i.e. giving someone "complete" permission)</li>
                         </ul>
                         <br>
                         <p><b>Step 4 </b>(skip if user is <u>not</u> part of a GROUP): Select the group (i.e. students or employees) from the list to see it's permissions. Users in the group take on those permissions</p>
                         <p>
-                        <ul class = "indent">
-                            <li><b>Hint: </b> Check "View Inheritance" tab to see which permissions are being granted to a given user</p></li>
-                        </ul>
+                        <br>
+                        <p><b>Hint: </b> The 'Final' column shows the actual permissions (taking into account inheritance and group permissions. Ensure this column is correct.</p>
                         
                         <!--  <br>
                         <h3>Tab Overview</h3>

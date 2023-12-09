@@ -7,23 +7,23 @@ inherit_checkbox.addEventListener('click', function () {
     inherit_dialog = define_new_dialog("inherit_dialog", title='Inheriting from parent', options = {
         position: { my: "top+40", at: "top", of: $('#html-loc') },
         height: 250,
-        width: 300,  
+        width: 330,  
     })
     inherit_dialog.dialog('open')
     inherit_dialog.html(`
         <div id="inherit_dialog_text">
             Checking this box will set the permissions for ALL users to be the same as the permissions of the folder you're in. <br>
-            If the box is already checked, go to "View Inheritance" to see how the parent permissions are effecting the permissions you see below!
+            The 'Final" column tells you the effective permission state. This factors in inheritance.
         </div>`)
         
 });    
 
 let replace_checkbox = document.getElementById('learn_replace');
 replace_checkbox.addEventListener('click', function () {
-    replace_dialog = define_new_dialog("replace_dialog", title='Replacing child permissions', options = {
+    replace_dialog = define_new_dialog("replace_dialog", title='Replace child permissions', options = {
         position: { my: "top+40", at: "top", of: $('#html-loc') },
         height: 250,
-        width: 300,  
+        width: 330,  
     })
     replace_dialog.dialog('open')
     replace_dialog.html(`
@@ -229,6 +229,7 @@ function define_new_effective_permissions(id_prefix, add_info_col = false, which
                     // This action is allowed. Find the checkbox cell and put a checkbox there.
                     let this_checkcell = effective_container.find(`#${id_prefix}_checkcell_${p_id}`)
                     this_checkcell.append(`<span id="${id_prefix}_checkbox_${p_id}" class="oi oi-check"/>`)
+                    
                 }
             }
         }
@@ -265,7 +266,7 @@ function define_grouped_permission_checkboxes(id_prefix, which_groups = null) {
             <td id="${id_prefix}_${g}_name">${g}</td>
         </tr>`)
         for(let ace_type of ['allow', 'deny']) {
-            row.append(`<td id="${id_prefix}_${g}_${ace_type}_cell">
+            row.append(`<td id="${id_prefix}_${g}_${ace_type}_cell" style="text-align: center;" >
                 <input type="checkbox" id="${id_prefix}_${g}_${ace_type}_checkbox" ptype="${ace_type}" class="groupcheckbox" group="${g}" ></input>
             </td>`)
         }
@@ -338,10 +339,10 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
     let perm_table = $(`
     <table id="${id_prefix}" id = "permtable_2" class="ui-widget-content" width="100%">
         <tr id="${id_prefix}_header">
-            <th id="${id_prefix}_header_p" width="99%">Normal permissions</th>
-            <th id="${id_prefix}_header_allow">Allow  </th>
-            <th id="${id_prefix}_header_deny">Deny  </th>
-            <th id="${id_prefix}_header_inherited">Inherited?</th>
+            <th id="${id_prefix}_header_p" width="95%">Normal permissions</th>
+            <th id="${id_prefix}_header_allow" style="padding: 6px;">Allow</th>
+            <th id="${id_prefix}_header_deny" style="padding: 6px;">Deny</th>
+            <th id="${id_prefix}_header_inherited" style="padding: 6px; ">Final</th>
         </tr>
     </table>
     `)
@@ -356,13 +357,12 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
         let p_id = p.replace(/[ \/]/g, '_') 
 
         //divide permissions into normal and advanced
-       
         let row = $(`<tr id="${id_prefix}_row_${p_id}">
         <td id="${id_prefix}_${p_id}_name">${p}</td>
         </tr>`)
         // Add allow and deny checkboxes:
         for(let ace_type of ['allow', 'deny']) {
-            row.append(`<td id="${id_prefix}_${p_id}_${ace_type}_cell">
+            row.append(`<td id="${id_prefix}_${p_id}_${ace_type}_cell"  style="text-align: center;">
                 <input type="checkbox" id="${id_prefix}_${p_id}_${ace_type}_checkbox" ptype="${ace_type}" class="perm_checkbox" permission="${p}" ></input>
             </td>`)        
         }
@@ -370,26 +370,26 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
         if(p_id == "change_permissions"){     
             //let row1 = $(`<tr><td style="color:white;">   .</td> </tr>`)
             let row2 = $(`<tr id="${id_prefix}_header">
-                <th id="${id_prefix}_header_p" width="99%"><u>Extra</u> permissions</th>
-                <th id="${id_prefix}_header_allow">Allow  </th>
-                <th id="${id_prefix}_header_deny">Deny  </th>
-                <th id="${id_prefix}_header_inherited">Inherited?</th></tr>`)
+                <th id="${id_prefix}_header_p" width="92%"><u>Admin</u> permissions</th>
+                <th id="${id_prefix}_header_allow" style="padding: 6px;">Allow</th>
+                <th id="${id_prefix}_header_deny" style="padding: 6px;">Deny</th>
+                <th id="${id_prefix}_header_inherited" style="padding: 6px;">Final</th></tr>`)
             let row3 = $(`<tr id="${id_prefix}_row_traverse_folder_execute_file">
                 <td id="${id_prefix}_traverse_folder_execute_file_name">traverse folder/execute file</td>
                 </tr>`)
                 // Add allow and deny checkboxes:
                 for(let ace_type of ['allow', 'deny']) {
-                    row3.append(`<td id="${id_prefix}_traverse_folder_execute_file_${ace_type}_cell">
+                    row3.append(`<td id="${id_prefix}_traverse_folder_execute_file_${ace_type}_cell" style="text-align: center;" >
                         <input type="checkbox" id="${id_prefix}_traverse_folder_execute_file_${ace_type}_checkbox" ptype="${ace_type}" class="perm_checkbox" permission="traverse folder/execute file" ></input>
                     </td>`)        
                 }
-                row3.append(`<p id="${id_prefix}_traverse_folder_execute_file_is_inherited">N/A</p>`)
+                row3.append(`<p id="${id_prefix}_traverse_folder_execute_file_is_inherited" style="padding-right: 6px;">N/A</p>`)
           //  perm_table.append(row1)
             perm_table.append(row2)
             perm_table.append(row3)
         }
         if(p_id != "traverse_folder_execute_file"){  
-            row.append(`<p id="${id_prefix}_${p_id}_is_inherited">N/A</p>`)     
+            row.append(`<p id="${id_prefix}_${p_id}_is_inherited" style="padding-right:6px">N/A</p>`)     
             perm_table.append(row)
         }
 
@@ -417,8 +417,12 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
             //change name on table:
             $(`#${id_prefix}_header_username`).text(username)
 
+           
+  
+
             // Get permissions:
             let all_perms = get_total_permissions(path_to_file[filepath], username)
+            
             for( ace_type in all_perms) { // 'allow' and 'deny'
                 for(allowed_perm in all_perms[ace_type]) {
                     let p_id = allowed_perm.replace(/[ \/]/g, '_') 
@@ -427,19 +431,44 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
                     if(all_perms[ace_type][allowed_perm].inherited) {
                         // can't uncheck inherited permissions.
                         checkbox.prop('disabled', true)
-                        $(`#${id_prefix}_${p_id}_is_inherited`).empty()
-                        $(`#${id_prefix}_${p_id}_is_inherited`).append('Yes')
+
   
                     }
                     else{
-                        $(`#${id_prefix}_${p_id}_is_inherited`).empty()
-                        $(`#${id_prefix}_${p_id}_is_inherited`).append('No')
+
      
                     }
                 }
 
                 
             }
+
+             //total perm **ADD GROUP
+             for( p in permissions){
+                let p_id = permissions[p].replace(/[ \/]/g, '_')
+                if( allow_user_action(path_to_file[filepath], all_users[username], permissions[p])) {
+                    //console.log(p_id + " allowed")
+                    $(`#${id_prefix}_${p_id}_is_inherited`).empty()
+                    $(`#${id_prefix}_${p_id}_is_inherited`).append('allowed')
+                }else {
+                    //console.log(p_id + " not allowed")
+                    $(`#${id_prefix}_${p_id}_is_inherited`).empty()
+                    $(`#${id_prefix}_${p_id}_is_inherited`).append('denied')
+                }
+            } 
+
+            if( $(`#user_select_${username}_icon`).hasClass('oi-people')){
+                for( ace_type in all_perms) { // 'allow' and 'deny'
+                    for(allowed_perm in all_perms[ace_type]) {
+                        let p_id = allowed_perm.replace(/[ \/]/g, '_') 
+                        $(`#${id_prefix}_${p_id}_is_inherited`).empty()
+                        $(`#${id_prefix}_${p_id}_is_inherited`).append('allowed')
+            
+                    }
+                } 
+            }
+
+             
             
             //row.append(`<p id="${id_prefix}_is_inherited">Yes</p>`)
         }
