@@ -183,8 +183,8 @@
 }
 .guide{
     position: fixed;
-    top: 50px;
-    bottom: 10px;
+    top: 40px;
+    bottom: 0;
     right: 0;
     width: 37%;
     z-index: 999;
@@ -199,11 +199,11 @@
 }
 .guideInfo{
     position: absolute;
-    top: 50px;
+    top: 40px;
     right: 20px;
     width: 90%;
-    height: 90%;
-    font-size: 18px;
+    height: 100%;
+    font-size: 17px;
     line-height: 22px;
 }
 li{
@@ -266,7 +266,7 @@ li{
 }
 #guide{
     font-size: 18px;
-    height: 600px;
+    height: 650px;
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
