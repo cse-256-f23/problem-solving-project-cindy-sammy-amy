@@ -1,6 +1,14 @@
 .file {
     padding: 8;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid rgb(115, 115, 115);
+}
+
+.folder{
+    border-bottom: 1px solid rgb(115, 115, 115);
+    border-left: 1px solid rgb(115, 115, 115);
+    border-right: 1px solid rgb(115, 115, 115);;
+    border-radius: 4px;
+    padding:0px;
 }
 
 .section {
