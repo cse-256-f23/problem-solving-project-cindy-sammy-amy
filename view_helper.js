@@ -12,8 +12,8 @@ inherit_checkbox.addEventListener('click', function () {
     inherit_dialog.dialog('open')
     inherit_dialog.html(`
         <div id="inherit_dialog_text">
-            Checking this box will set the permissions for ALL users to be the same as the permissions of the folder you're in. <br>
-            The 'Final" column tells you the effective permission state. This factors in inheritance.
+            Checking this box will set the permissions for ALL users to be the same as the permissions of the folder you're in. 
+            <b> The 'Final" column tells you the effective permission state. This factors in inheritance.</b>
         </div>`)
         
 });    
@@ -28,8 +28,8 @@ replace_checkbox.addEventListener('click', function () {
     replace_dialog.dialog('open')
     replace_dialog.html(`
         <div id="replace_dialog_text">
-            Checking this box will set the permissions for every file/folder within <i>this</i> folder to the permissions of <i>this</i> folder for ALL users. <br>
-            You shoudl do this if you want all files within this folder to have the same permissions!
+            Checking this box will set the permissions for every file/folder within <i>this</i> folder to the permissions of this folder for ALL users. 
+            <b>You should do this if you want all files within this folder to have the same permissions!</b>
         </div>`)
         
 });    
@@ -458,15 +458,19 @@ function define_permission_checkboxes(id_prefix, which_permissions = null){
             } 
 
             if( $(`#user_select_${username}_icon`).hasClass('oi-people')){
+                all_perms = get_aces_file_user(path_to_file[filepath], username)
+                console.log(all_perms)
                 for( ace_type in all_perms) { // 'allow' and 'deny'
-                    for(allowed_perm in all_perms[ace_type]) {
-                        let p_id = allowed_perm.replace(/[ \/]/g, '_') 
+                    if( all_perms[ace_type].ace.is_allow_ace){
+                        let p_id = all_perms[ace_type].ace.permission.replace(/[ \/]/g, '_') 
                         $(`#${id_prefix}_${p_id}_is_inherited`).empty()
                         $(`#${id_prefix}_${p_id}_is_inherited`).append('allowed')
-            
                     }
-                } 
-            }
+
+            
+                    
+                }
+            } 
 
              
             

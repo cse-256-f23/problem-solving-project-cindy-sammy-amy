@@ -403,9 +403,9 @@ $( "#advtabs" ).tabs({
     heightStyle: 'fill'
 });
 let adv_contents = $(`#advdialog`).dialog({
-    position: { my: "left+15 top+10", at: "left top", of: $('#html-loc') },
+    position: { my: "left+15 top+20", at: "left top", of: $('#html-loc') },
     width: "55%",
-    height: 550,
+    height: 600,
     modal: true,
     autoOpen: false,
     appendTo: "#html-loc",
@@ -504,8 +504,8 @@ $('#adv_perm_replace_child_permissions').change(function(){
         let filepath = $('#advdialog').attr('filepath')
         let file_obj = path_to_file[filepath]
         $(`<div id="replace_perm_dialog" title="Security">
-            This will replace explicitly defined permissions on anything in this folder with permissions from ${file_obj.filename}. Item <i>must</i> be a folder to continue.<br/>
-            Do you wish to continue?
+            This will replace explicitly defined permissions on anything in this folder with permissions from ${file_obj.filename}. Item <i>must</i> be a folder to continue.
+            <b> Do you wish to continue? </b>
         </div>`).dialog({
             modal: true,
             position: { my: "top", at: "top", of: $('#html-loc') },

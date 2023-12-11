@@ -156,15 +156,18 @@
                         <br>
                         <p><b>Step 3: </b>Check "Allow" or "Deny" for each permission you want to change. </p>
                         <ul class = "indent">
-                            <li>If both are checked, "Deny" overrides "Allow"</li>
-                            <li>If neither is checked, permissions are <u>denied</u></li>
-                            <li>Don't touch the "admin" permissions unless specifically told (i.e. giving someone "complete" permission)</li>
+                            <li>Don't touch the "admin" permissions unless specifically told (i.e. giving someone "complete" permission)</p></li>
+                            <li>The "Final" column shows the actual permissions (taking into account inheritance and group permissions)</li>
                         </ul>
                         <br>
-                        <p><b>Step 4 </b>(skip if user is <u>not</u> part of a GROUP): Select the group (i.e. students or employees) from the list to see it's permissions. Users in the group take on those permissions</p>
-                        <p>
-                        <br>
-                        <p><b>Hint: </b> The 'Final' column shows the actual permissions (taking into account inheritance and group permissions. Ensure this column is correct.</p>
+                        <p ><b>Hints: </b> 
+                            <ul class= "indent">
+                                <li>If neither box is checked, permissions are <u>denied</u></li>
+                                <li>If both are checked, "Deny" overrides "Allow"</li>
+                                <li>If checkboxes are <u>grey and immutable</u>, try checking the "Inherit (take on) permissions from parent" box</li>
+                                <li>If the "Final" column does not match what you expect, the user might be in a group. Try clicking the group (i.e. students or employees) and changing permissions there.</li>    
+                            </ul>
+                        </p>
                         
                         <!--  <br>
                         <h3>Tab Overview</h3>
